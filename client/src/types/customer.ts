@@ -15,7 +15,7 @@ export interface CustomerState {
 }
 
 export enum CustomerActionTypes {
-    REQUEST = "REQUEST",
+    CUSTOMER_REQUEST = "CUSTOMER_REQUEST",
     CREATE_CUSTOMER_SUCCESS = "CREATE_CUSTOMER_SUCCESS",
     GET_CUSTOMERS_SUCCESS = "GET_CUSTOMERS_SUCCESS",
     GET_CUSTOMER_SUCCESS = "GET_CUSTOMER_SUCCESS",
@@ -24,8 +24,8 @@ export enum CustomerActionTypes {
     REQUEST_ERROR = "REQUEST_ERROR",
 }
 
-interface RequestAction {
-    type: CustomerActionTypes.REQUEST;
+interface CustomerRequestAction {
+    type: CustomerActionTypes.CUSTOMER_REQUEST;
 }
 
 interface CreateCustomerSuccessAction {
@@ -55,7 +55,7 @@ interface RequestErrorAction {
 }
 
 export type CustomerAction =
-    RequestAction |
+    CustomerRequestAction |
     CreateCustomerSuccessAction |
     GetCustomersSuccessAction |
     GetCustomerSuccessAction |

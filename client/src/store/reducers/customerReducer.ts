@@ -8,20 +8,20 @@ const initialState: CustomerState = {
 
 export const customerReducer = (state = initialState, action: CustomerAction) => {
     switch (action.type) {
-        case CustomerActionTypes.REQUEST:
-            return {loading: true, error: null, customers: []}
+        case CustomerActionTypes.CUSTOMER_REQUEST:
+            return {...state, loading: true}
         case CustomerActionTypes.CREATE_CUSTOMER_SUCCESS:
-            return {loading: false, error: null, customers: []}
+            return {...state, loading: false, error: null}
         case CustomerActionTypes.GET_CUSTOMERS_SUCCESS:
             return {loading: false, error: null, customers: action.payload}
         case CustomerActionTypes.GET_CUSTOMER_SUCCESS:
-            return {loading: false, error: null, customers: []}
+            return {...state, loading: false, error: null}
         case CustomerActionTypes.DELETE_CUSTOMER_SUCCESS:
-            return {loading: false, error: null, customers: []}
+            return {...state, loading: false, error: null}
         case CustomerActionTypes.UPDATE_CUSTOMER_SUCCESS:
-            return {loading: false, error: null, customers: []}
+            return {...state, loading: false, error: null}
         case CustomerActionTypes.REQUEST_ERROR:
-            return {loading: false, error: action.payload, customers: []}
+            return {...state, loading: false, error: action.payload}
         default:
             return state;
     }

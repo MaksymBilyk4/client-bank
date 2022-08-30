@@ -13,7 +13,7 @@ export interface AccountState {
 }
 
 export enum AccountActionTypes {
-    REQUEST = "REQUEST",
+    ACCOUNT_REQUEST = "ACCOUNT_REQUEST",
     CREATE_ACCOUNT_SUCCESS = "CREATE_ACCOUNT_SUCCESS",
     GET_ACCOUNTS_SUCCESS = "GET_ACCOUNTS_SUCCESS",
     GET_ACCOUNT_SUCCESS = "GET_ACCOUNT_SUCCESS",
@@ -24,8 +24,8 @@ export enum AccountActionTypes {
     REQUEST_ERROR = "REQUEST_ERROR",
 }
 
-interface RequestAction {
-    type: AccountActionTypes.REQUEST;
+interface AccountRequestAction {
+    type: AccountActionTypes.ACCOUNT_REQUEST;
 }
 
 interface CreateAccountSuccessAction {
@@ -63,7 +63,7 @@ interface RequestErrorAction {
 }
 
 export type AccountAction =
-    RequestAction |
+    AccountRequestAction |
     CreateAccountSuccessAction |
     GetAccountsSuccessAction |
     GetAccountSuccessAction |

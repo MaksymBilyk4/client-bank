@@ -5,7 +5,7 @@ import axios from "axios";
 export const getAccounts = () =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
-            dispatch({type: AccountActionTypes.REQUEST});
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
             const response = await axios.get("http://localhost:9000/accounts");
             // Timeout для иммитированой загрузки с сервера
             setTimeout(() => {
