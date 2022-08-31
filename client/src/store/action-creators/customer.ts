@@ -7,7 +7,7 @@ export const getCustomers = () =>
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
-            const response = await axios.get("http://localhost:9000/customers");
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}customers`);
             // Timeout для иммитированой загрузки с сервера
             setTimeout(() => {
                 dispatch({type: CustomerActionTypes.GET_CUSTOMERS_SUCCESS, payload: response.data});
@@ -24,7 +24,7 @@ export const createCustomer = (name: string, email: string, age: number) =>
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
-            const response = await axios.post("http://localhost:9000/customers", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}customers`, {
                 name,
                 email,
                 age
@@ -43,7 +43,7 @@ export const deleteCustomer = (id: number) =>
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
-            const response = await axios.delete(`http://localhost:9000/customers/${id}`);
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}customers/${id}`);
             console.log(response);
             dispatch({type: CustomerActionTypes.DELETE_CUSTOMER_SUCCESS});
         } catch (e) {
@@ -58,7 +58,7 @@ export const updateCustomer = (id: number | undefined, name: string | undefined,
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
-            const response = await axios.put(`http://localhost:9000/customers`, {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}customers`, {
                 id,
                 name,
                 email,
@@ -80,7 +80,7 @@ export const getCustomerById = (id: number) =>
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
-            const {data} = await axios.get(`http://localhost:9000/customers/${id}`);
+            const {data} = await axios.get(`${process.env.REACT_APP_API_URL}customers/${id}`);
             dispatch({type: CustomerActionTypes.GET_CUSTOMER_SUCCESS});
             return data;
         } catch (e) {

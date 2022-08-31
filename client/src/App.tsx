@@ -5,13 +5,13 @@ import AppRouter from "./components/AppRouter";
 import {useActions} from "./hooks/useActions";
 
 const App = () => {
-
     const {getCustomers, getAccounts} = useActions();
 
     useEffect(() => {
         getCustomers();
         getAccounts();
     }, []);
+
     return (
         <>
             <BrowserRouter>

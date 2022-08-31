@@ -6,7 +6,7 @@ export const getAccounts = () =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.get("http://localhost:9000/accounts");
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}accounts`);
             // Timeout для иммитированой загрузки с сервера
             setTimeout(() => {
                 dispatch({type: AccountActionTypes.GET_ACCOUNTS_SUCCESS, payload: response.data});
@@ -23,7 +23,7 @@ export const createAccount = (customerId: number | undefined, currency: string, 
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.post(`http://localhost:9000/customers/${customerId}/account`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}customers/${customerId}/account`, {
                 customerId,
                 currency,
                 balance
@@ -42,7 +42,7 @@ export const deleteAccount = (customerId: number, accountId: number) =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.delete(`http://localhost:9000/customers/${customerId}/account/${accountId}`)
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}customers/${customerId}/account/${accountId}`)
             console.log(response);
             dispatch({type: AccountActionTypes.DELETE_ACCOUNT_SUCCESS});
         } catch (e) {
@@ -57,7 +57,7 @@ export const getAccountById = (id: number) =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = axios.get(`http://localhost:9000/accounts/${id}`);
+            const response = axios.get(`${process.env.REACT_APP_API_URL}accounts/${id}`);
             console.log(response);
             dispatch({type: AccountActionTypes.GET_ACCOUNT_SUCCESS});
         } catch (e) {
@@ -72,7 +72,7 @@ export const transfer = (toAccount: string, fromAccount: string, amount: number)
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.put(`http://localhost:9000/accounts/transfer?toNumber=${toAccount}&fromNumber=${fromAccount}&amount=${amount}`);
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}accounts/transfer?toNumber=${toAccount}&fromNumber=${fromAccount}&amount=${amount}`);
             console.log(response);
             dispatch({type: AccountActionTypes.TRANSFER_MONEY_SUCCESS});
         } catch (e) {
@@ -87,7 +87,7 @@ export const withdraw = (number: string, amount: number) =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.put(`http://localhost:9000/accounts/withdraw?number=${number}&amount=${amount}`);
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}accounts/withdraw?number=${number}&amount=${amount}`);
             console.log(response);
             dispatch({type: AccountActionTypes.WITHDRAW_MONEY_SUCCESS});
         } catch (e) {
@@ -102,7 +102,7 @@ export const up = (number: string, amount: number) =>
     async (dispatch: Dispatch<AccountAction>) => {
         try {
             dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
-            const response = await axios.put(`http://localhost:9000/accounts/up?number=${number}&amount=${amount}`);
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}accounts/up?number=${number}&amount=${amount}`);
             console.log(response);
             dispatch({type: AccountActionTypes.UP_MONEY_SUCCESS});
         } catch (e) {
