@@ -60,10 +60,55 @@ export const getAccountById = (id: number) =>
             const response = axios.get(`http://localhost:9000/accounts/${id}`);
             console.log(response);
             dispatch({type: AccountActionTypes.GET_ACCOUNT_SUCCESS});
-        }catch (e) {
+        } catch (e) {
             dispatch({
                 type: AccountActionTypes.REQUEST_ERROR,
                 payload: "Failed to get account. " + String(e)
+            });
+        }
+    }
+
+export const transfer = (toAccount: string, fromAccount: string, amount: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = await axios.put(`http://localhost:9000/accounts/transfer?toNumber=${toAccount}&fromNumber=${fromAccount}&amount=${amount}`);
+            console.log(response);
+            dispatch({type: AccountActionTypes.TRANSFER_MONEY_SUCCESS});
+        } catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Transfer failed. " + String(e)
+            });
+        }
+    }
+
+export const withdraw = (number: string, amount: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = await axios.put(`http://localhost:9000/accounts/withdraw?number=${number}&amount=${amount}`);
+            console.log(response);
+            dispatch({type: AccountActionTypes.WITHDRAW_MONEY_SUCCESS});
+        } catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Withdraw failed. " + String(e)
+            });
+        }
+    }
+
+export const up = (number: string, amount: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = await axios.put(`http://localhost:9000/accounts/up?number=${number}&amount=${amount}`);
+            console.log(response);
+            dispatch({type: AccountActionTypes.UP_MONEY_SUCCESS});
+        } catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Up failed. " + String(e)
             });
         }
     }
