@@ -73,7 +73,7 @@ public class CustomerService implements I_Service<Customer> {
         return accountDao.save(account);
     }
 
-    public Customer deleteAccount(Long customerId, Long accountId) {
-        return getOne(customerId).deleteAccount(accountId);
+    public boolean deleteAccount(Long accountId) {
+        return accountDao.deleteById(accountId);
     }
 }

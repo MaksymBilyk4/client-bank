@@ -23,11 +23,6 @@ public class Customer {
         return this;
     }
 
-    public Customer deleteAccount(Long id) {
-        this.accounts.removeIf(account -> account.getId().equals(id));
-        return this;
-    }
-
 
     public Long getId() {
         return id;

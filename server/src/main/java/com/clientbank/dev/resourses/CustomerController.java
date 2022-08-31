@@ -47,10 +47,10 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}/account/{accountId}")
-    public Customer deleteAccount(
+    public boolean deleteAccount(
             @PathVariable(name = "id") Long customerId,
             @PathVariable(name = "accountId") Long accountId
     ) {
-        return customerService.deleteAccount(customerId, accountId);
+        return customerService.deleteAccount(accountId);
     }
 }
