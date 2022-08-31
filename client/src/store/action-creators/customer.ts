@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {CustomerAction, CustomerActionTypes} from "../../types/customer";
+import {Customer, CustomerAction, CustomerActionTypes} from "../../types/customer";
 import axios from "axios";
 import {Account} from "../../types/account";
 
@@ -54,7 +54,7 @@ export const deleteCustomer = (id: number) =>
         }
     }
 
-export const updateCustomer = (id: number, name: string, email: string, age: number, accounts: Account[]) =>
+export const updateCustomer = (id: number | undefined, name: string | undefined, email: string | undefined, age: number | undefined, accounts: Account[] | []) =>
     async (dispatch: Dispatch<CustomerAction>) => {
         try {
             dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
@@ -72,6 +72,21 @@ export const updateCustomer = (id: number, name: string, email: string, age: num
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
                 payload: "Failed to update customer" + String(e)
+            });
+        }
+    }
+
+export const getCustomerById = (id: number) =>
+    async (dispatch: Dispatch<CustomerAction>) => {
+        try {
+            dispatch({type: CustomerActionTypes.CUSTOMER_REQUEST});
+            const {data} = await axios.get(`http://localhost:9000/customers/${id}`);
+            dispatch({type: CustomerActionTypes.GET_CUSTOMER_SUCCESS});
+            return data;
+        } catch (e) {
+            dispatch({
+                type: CustomerActionTypes.REQUEST_ERROR,
+                payload: "Failed to get customer" + String(e)
             });
         }
     }
