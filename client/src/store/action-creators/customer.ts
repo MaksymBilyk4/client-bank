@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {Customer, CustomerAction, CustomerActionTypes} from "../../types/customer";
+import {CustomerAction, CustomerActionTypes} from "../../types/customer";
 import axios from "axios";
 import {Account} from "../../types/account";
 
@@ -15,7 +15,7 @@ export const getCustomers = () =>
         } catch (e) {
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
-                payload: "Failed to get customers" + String(e)
+                payload: "Failed to get customers. " + String(e)
             });
         }
     }
@@ -34,7 +34,7 @@ export const createCustomer = (name: string, email: string, age: number) =>
         } catch (e) {
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
-                payload: "Failed to create customer" + String(e)
+                payload: "Failed to create customer. " + String(e)
             });
         }
     }
@@ -49,7 +49,7 @@ export const deleteCustomer = (id: number) =>
         } catch (e) {
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
-                payload: "Failed to delete customer" + String(e)
+                payload: "Failed to delete customer. " + String(e)
             });
         }
     }
@@ -71,7 +71,7 @@ export const updateCustomer = (id: number | undefined, name: string | undefined,
         } catch (e) {
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
-                payload: "Failed to update customer" + String(e)
+                payload: "Failed to update customer. " + String(e)
             });
         }
     }
@@ -86,7 +86,7 @@ export const getCustomerById = (id: number) =>
         } catch (e) {
             dispatch({
                 type: CustomerActionTypes.REQUEST_ERROR,
-                payload: "Failed to get customer" + String(e)
+                payload: "Failed to get customer. " + String(e)
             });
         }
     }

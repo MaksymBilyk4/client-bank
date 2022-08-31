@@ -10,11 +10,60 @@ export const getAccounts = () =>
             // Timeout для иммитированой загрузки с сервера
             setTimeout(() => {
                 dispatch({type: AccountActionTypes.GET_ACCOUNTS_SUCCESS, payload: response.data});
-            }, 500)
+            }, 500);
         } catch (e) {
             dispatch({
                 type: AccountActionTypes.REQUEST_ERROR,
-                payload: "Failed to get accounts" + String(e)
-            })
+                payload: "Failed to get accounts. " + String(e)
+            });
+        }
+    }
+
+export const createAccount = (customerId: number | undefined, currency: string, balance: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = await axios.post(`http://localhost:9000/customers/${customerId}/account`, {
+                customerId,
+                currency,
+                balance
+            });
+            console.log(response);
+            dispatch({type: AccountActionTypes.CREATE_ACCOUNT_SUCCESS});
+        } catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Failed create account. " + String(e)
+            });
+        }
+    }
+
+export const deleteAccount = (customerId: number, accountId: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = await axios.delete(`http://localhost:9000/customers/${customerId}/account/${accountId}`)
+            console.log(response);
+            dispatch({type: AccountActionTypes.DELETE_ACCOUNT_SUCCESS});
+        } catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Failed to delete account. " + String(e)
+            });
+        }
+    }
+
+export const getAccountById = (id: number) =>
+    async (dispatch: Dispatch<AccountAction>) => {
+        try {
+            dispatch({type: AccountActionTypes.ACCOUNT_REQUEST});
+            const response = axios.get(`http://localhost:9000/accounts/${id}`);
+            console.log(response);
+            dispatch({type: AccountActionTypes.GET_ACCOUNT_SUCCESS});
+        }catch (e) {
+            dispatch({
+                type: AccountActionTypes.REQUEST_ERROR,
+                payload: "Failed to get account. " + String(e)
+            });
         }
     }

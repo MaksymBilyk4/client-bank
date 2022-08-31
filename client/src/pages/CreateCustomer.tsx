@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useActions} from "../hooks/useActions";
 import {Button, Form, Input} from "antd";
 import {rules} from "../utils/rools";
@@ -6,7 +6,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-const CreateCustomer = () => {
+const CreateCustomer: FC = () => {
     const {loading, error} = useTypedSelector(state => state.customer);
 
     const {createCustomer} = useActions();

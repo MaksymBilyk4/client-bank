@@ -34,7 +34,7 @@ export const accountDataColumn = [
     },
     {
         title: "Owner Id",
-        dataIndex: "customer",
+        dataIndex: "customerId",
         key: "customerId",
         sorter: (id1, id2) => id1.id - id2.id,
         render: (customer) => <p className={"table-font"}>{customer}</p>,

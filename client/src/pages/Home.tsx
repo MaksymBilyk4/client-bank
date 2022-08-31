@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import "../utils/css/home.css";
 import {Table} from "antd";
@@ -8,7 +8,7 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 import {useActions} from "../hooks/useActions";
 
-const Home = () => {
+const Home: FC = () => {
     const customerState = useTypedSelector(state => state.customer);
     const accountState = useTypedSelector(state => state.account);
 
